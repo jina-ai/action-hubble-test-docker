@@ -2,7 +2,7 @@ name: 'Test Docker Image'
 description: 'test Dockerfile for Hubble'
 outputs:
   exit_code:
-    decription: 'exit successfully with 0'
+    description: 'exit successfully with 0'
     value: ${{ steps.test_docker.outputs.exit_code}}
 runs:
   using: "composite"
