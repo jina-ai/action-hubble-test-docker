@@ -32,7 +32,7 @@ if [[ -f "Dockerfile" ]]; then
     else
       ARGS=""
   fi
-  nohup jina pea --uses docker://foo:latest $ARGS > nohup.out 2>&1 &
+  nohup jina executor --uses docker://foo:latest $ARGS --name Foo > nohup.out 2>&1 &
   PID=$!
   sleep 10
   if ps -p $PID > /dev/null;
@@ -42,7 +42,7 @@ if [[ -f "Dockerfile" ]]; then
     docker rmi foo:latest
     local_exit_code=0
   else
-    echo "jina pea --uses docker://foo:latest" could NOT start
+    echo "jina executor --uses docker://foo:latest --name Foo" could NOT start
   fi
   echo ~~~~~~~OUTPUT BELOW~~~~~~~
   cat nohup.out
