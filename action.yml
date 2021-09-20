@@ -1,14 +1,9 @@
 name: 'Test Docker Image'
 description: 'test Dockerfile for Hubble'
-inputs:
-#  test_dir:
-#    description: the directory to run the tests
-#    required: true
-#    default: '.'
-  outputs:
-    exit_code:
-      decription: 'exit successfully with 0'
-      value: ${{ steps.test_docker.outputs.exit_code}}
+outputs:
+  exit_code:
+    decription: 'exit successfully with 0'
+    value: ${{ steps.test_docker.outputs.exit_code}}
 runs:
   using: "composite"
   steps:
