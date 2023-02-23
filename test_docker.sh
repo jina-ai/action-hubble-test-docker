@@ -7,6 +7,12 @@ test_dir=$1
 echo testing $test_dir
 cd $test_dir
 
+PLATFORM=$2
+PLATFORM_PARAMS=""
+if [[ -z $PLATFORM ]]; then
+  echo testing with platform $PLATFORM
+  PLATFORM_PARAMS="$PLATFORM_PARAMS --platform $PLATFORM"
+fi
 # assume failure
 local_exit_code=1
 
@@ -23,7 +29,7 @@ if [[ -f "Dockerfile" ]]; then
     pip install -r tests/requirements.txt
   fi
 
-  docker build -t foo .
+  docker build$PLATFORM_PARAMS -t foo .
   if [[ -f "tests/pre-docker.sh" ]]; then # allow entrypoint for any pre-docker run operations, liek downloading a model to mount
     bash tests/pre-docker.sh
   fi
