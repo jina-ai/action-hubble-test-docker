@@ -9,7 +9,7 @@ cd $test_dir
 
 PLATFORM=$2
 PLATFORM_PARAMS=""
-if [[ -z $PLATFORM ]]; then
+if [[ ! -z $PLATFORM ]]; then
   echo testing with platform $PLATFORM
   PLATFORM_PARAMS="$PLATFORM_PARAMS --platform $PLATFORM"
 fi
