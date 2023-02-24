@@ -4,13 +4,20 @@ outputs:
   exit_code:
     description: 'exit successfully with 0'
     value: ${{ steps.test_docker.outputs.exit_code}}
+inputs:
+  platform:
+    description: 'Platform to run docker build'
+    required: false
+    default: 'amd64'
 runs:
   using: "composite"
   steps:
 #    - run: echo testing ${{ inputs.test_dir}}
-#      shell: bash
+#      shell: bash  
+    - name: Set up QEMU
+      uses: docker/setup-qemu-action@v2.1.0
     - id: test_docker
       run: |
-        ${{ github.action_path }}/test_docker.sh .
+        ${{ github.action_path }}/test_docker.sh . ${{ inputs.platform }}
         echo "::set-output name=exit_code::$(echo $local_exit_code)"
       shell: bash
